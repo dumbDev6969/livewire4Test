@@ -15,8 +15,10 @@ new class extends Component
 
     public function save()
     {
-        $this->validate();
+        // Get the validated inputs
+        $this->validate(); 
 
+        // Create the post
         Post::create([
             'title' => $this->title,
             'body' => $this->body,
@@ -24,7 +26,7 @@ new class extends Component
         ]);
 
         session()->flash('success', 'Post created successfully.');
-        $this->redirect(route('student.create'));
+        $this->redirect(route('student.create'), navigate: true);
     }
 };
 ?>
@@ -45,4 +47,6 @@ new class extends Component
 
         <flux:button variant="primary" type="submit">Save</flux:button>
     </form>
+
+    <a href="/dashboard" wire:navigate.hover>Posts</a>
 </div>
