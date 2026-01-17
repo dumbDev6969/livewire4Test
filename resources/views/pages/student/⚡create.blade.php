@@ -3,30 +3,19 @@
 use Livewire\Component;
 use Livewire\Attributes\Validate;
 use App\Models\Post;
+use App\Livewire\Forms\PostForm;
 use Illuminate\Support\Facades\Auth;
 
 new class extends Component
 {
-    #[Validate('required|string|max:255|min:3')]
-    public string $title = '';
-
-    #[Validate('required|string|max:255|min:5')]
-    public string $body = '';
-
+    public PostForm $form;
     public function save()
     {
-        // Get the validated inputs
-        $this->validate(); 
-
-        // Create the post
-        Post::create([
-            'title' => $this->title,
-            'body' => $this->body,
-            'user_id' => Auth::id(),
-        ]);
+        // Call the store method to store the post
+        $this->form->store();
 
         session()->flash('success', 'Post created successfully.');
-        $this->redirect(route('student.create'), navigate: true);
+        $this->redirect(route('student.posts'), navigate: true);
     }
 };
 ?>
@@ -41,9 +30,9 @@ new class extends Component
             </div>
         @endif
         
-        <flux:input label="Title" wire:model.blur="title"/>
+        <flux:input label="Title" wire:model.blur="form.title"/>
 
-        <flux:input label="Description" wire:model.blur="body"/>
+        <flux:input label="Description" wire:model.blur="form.body"/>
 
         <flux:button variant="primary" type="submit" class="data-loading:opacity-50">Save</flux:button>
 

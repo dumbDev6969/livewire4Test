@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Computed;
 
-new class extends Component
-{
+new class extends Component {
     public $search = '';
 
     #[Computed]
@@ -20,8 +19,6 @@ new class extends Component
         return Auth::user()->posts;
     }
 
-    
-
     #[On('delete-post')]
     public function delete(Post $post)
     {
@@ -33,7 +30,11 @@ new class extends Component
 
 <div>
     {{-- Nothing worth having comes easy. - Theodore Roosevelt --}}
-    <flux:input wire:model.live.debounce.1000ms="search" wire:keydown.enter="$refresh"/>
+    <flux:input wire:model.live.debounce.1000ms="search" wire:keydown.enter="$refresh" />
     <livewire:posts.post :items="$this->myPosts" />
-    
+    @if (session('success'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-base bg-green-50 rounded">
+            <span class="font-medium">{{ session('success') }}</span>
+        </div>
+    @endif
 </div>

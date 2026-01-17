@@ -26,6 +26,14 @@ new class extends Component
             >
                 Delete
             </flux:button>
+            
+            <a href="{{ route('edit.post', ['post' => $item->id]) }}">
+                <flux:button size="sm" variant="filled">
+                    Edit
+                </flux:button>
+            </a>
+            
+
         </li>
     @endforeach
 </ul>

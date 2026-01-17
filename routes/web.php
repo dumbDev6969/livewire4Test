@@ -18,6 +18,9 @@ Route::group(['middleware' => ['auth', ]], function () {
     Route::livewire('/student/posts', 'pages::student.posts')
     ->name('student.posts');
 
+    Route::livewire('/student/edit/{post}', 'pages::student.edit')
+    ->name('edit.post');
+
     Route::livewire('/posts', 'pages::posts')
     ->name('posts');
 });
