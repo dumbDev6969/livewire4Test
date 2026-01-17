@@ -16,6 +16,7 @@ new class extends Component
 
         session()->flash('success', 'Post created successfully.');
         $this->redirect(route('student.posts'), navigate: true);
+
     }
 };
 ?>

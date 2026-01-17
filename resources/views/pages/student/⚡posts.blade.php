@@ -24,6 +24,8 @@ new class extends Component {
     {
         // Delete the post
         $post->delete();
+
+        $this->dispatch('post-deleted');
     }
 };
 ?>

@@ -9,7 +9,7 @@ Route::get('/', function () {
 
 
 Route::group(['middleware' => ['auth', ]], function () {
-    Route::view('dashboard', 'dashboard')
+    Route::livewire('/student/dashboard', 'pages::student.dashboard')
     ->name('dashboard');
 
     Route::livewire('/student/create', 'pages::student.create')

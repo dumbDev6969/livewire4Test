@@ -1,12 +1,39 @@
-<x-layouts::app :title="__('Dashboard')">
-    <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
+<?php
+
+use Livewire\Component;
+use App\Models\Post;
+use Livewire\Attributes\Computed;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
+new class extends Component
+{
+    // Create a listener
+    #[On('post-created')] 
+    #[On('post-deleted')]
+    public function updatePost()
+    {
+        // This is just a listener
+    }
+
+    #[Computed]
+    public function postCount()
+    {
+        // Return the current logged in user's posts
+        return Auth::user()->posts()->count();
+    }
+};
+?>
+
+<div class=" min-h-screen">
+    {{-- Life is available only in the present moment. - Thich Nhat Hanh --}}
+    <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl " wire:poll.visible>
         <div class="grid auto-rows-min gap-4 md:grid-cols-3">
             <div class="p-6 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 flex flex-col gap-4">
                 <flux:text>Lorem</flux:text>
-                <flux:heading size="xl">$96,699.00</flux:heading>
+                <flux:heading size="xl">{{ $this->postCount }}</flux:heading>
                 <div class="flex items-center gap-2">
                     <flux:icon.arrow-trending-up variant="micro" class="text-green-600 dark:text-green-500" />
-                    <span class="text-sm text-green-600 dark:text-green-500">15.2% since last day</span>
+                    <span class="text-sm text-green-600 dark:text-green-500">1.2% since last day</span>
                 </div>
             </div>
             <div class="p-6 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 flex flex-col gap-4">
@@ -31,4 +58,4 @@
             
         </div>
     </div>
-</x-layouts::app>
+</div>
