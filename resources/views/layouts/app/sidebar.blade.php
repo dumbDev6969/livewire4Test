@@ -19,6 +19,14 @@
                     <flux:sidebar.item icon="pencil" :href="route('student.create')" :current="request()->routeIs('student.create')" wire:navigate>
                         {{ __('Student posting') }}
                     </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="pencil" :href="route('posts')" :current="request()->routeIs('posts')" wire:navigate>
+                        {{ __('Posts') }}
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="pencil" :href="route('student.posts')" :current="request()->routeIs('student.posts')" wire:navigate>
+                        {{ __('My posts') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 

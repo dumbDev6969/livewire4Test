@@ -45,7 +45,9 @@ new class extends Component
 
         <flux:input label="Description" wire:model.blur="body"/>
 
-        <flux:button variant="primary" type="submit">Save</flux:button>
+        <flux:button variant="primary" type="submit" class="data-loading:opacity-50">Save</flux:button>
+
+        <span class="not-data-loading:hidden">Saving...</span>
     </form>
 
     <a href="/dashboard" wire:navigate.hover>Posts</a>

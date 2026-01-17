@@ -2,20 +2,32 @@
 
 use Livewire\Component;
 use App\Models\Post;
-
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 new class extends Component
 {
-    public $posts;
-
-    public function mount()
+    public $search = '';
+    #[Computed] 
+    public function posts()
     {
-        $this->posts = Post::all();
+        if ($this->search) {
+            return Post::where('title', 'LIKE', '%' . $this->search . '%')->get();
+        }
+        return Post::all();
     }
+
+    #[On('delete-post')]
+    public function delete(Post $post)
+    {
+        $post->delete();
+    }
+    
 };
 ?>
 
-<div class="flex items-center justify-center min-h-screen border">
+<div class="flex items-center justify-center flex-col min-h-screen ">
     {{-- Well begun is half done. - Aristotle --}}
-    <livewire:posts.post :items="$posts" />
+    <flux:input wire:model.live.debounce.1000ms="search" wire:keydown.enter="$refresh"/>
+    <livewire:posts.post :items="$this->posts" />
     
 </div>
